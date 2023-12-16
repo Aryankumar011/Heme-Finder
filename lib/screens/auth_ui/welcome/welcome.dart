@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:home_finder_new/constants/assets_images.dart';
+import 'package:home_finder_new/widgets/primarybutton/primary_button.dart';
 
 class Welcome extends StatelessWidget {
   @override
   Widget build(Object context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -29,6 +30,14 @@ class Welcome extends StatelessWidget {
                 width: 300,
               ),
             ),
+            SizedBox(
+              height: 40,
+            ),
+            PrimaryButton(onPressed: () {}, title: 'Login'),
+            SizedBox(
+              height: 20,
+            ),
+            PrimaryButton(onPressed: () {}, title: 'Sign Up'),
           ],
         ),
       ),
