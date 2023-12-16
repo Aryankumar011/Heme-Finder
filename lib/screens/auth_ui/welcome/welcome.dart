@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:home_finder_new/constants/assets_images.dart';
+import 'package:home_finder_new/constants/routes.dart';
+import 'package:home_finder_new/screens/auth_ui/login/login.dart';
 import 'package:home_finder_new/widgets/primarybutton/primary_button.dart';
+import 'package:home_finder_new/widgets/top_titles/top_titleles.dart';
 
 class Welcome extends StatelessWidget {
   @override
-  Widget build(Object context) {
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: kToolbarHeight - 10,
+            TopTitles(
+              title: 'Welcome',
+              subTitle: 'Buy Any Home Using This App',
             ),
-            const Text('Welcome',
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-            const Text('Buy Any Home Using This App',
-                style: TextStyle(
-                  fontSize: 20,
-                )),
-            const SizedBox(
-              height: 20,
+            SizedBox(
+              height: 40,
             ),
             Center(
               child: Image.asset(
@@ -33,7 +31,11 @@ class Welcome extends StatelessWidget {
             SizedBox(
               height: 40,
             ),
-            PrimaryButton(onPressed: () {}, title: 'Login'),
+            PrimaryButton(
+                onPressed: () {
+                  Routes.instance.push(widget: Login(), context: context);
+                },
+                title: 'Login'),
             SizedBox(
               height: 20,
             ),
