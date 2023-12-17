@@ -44,15 +44,21 @@ class _LoginState extends State<Login> {
                     decoration: InputDecoration(
                         prefixIcon: const Icon(Icons.password),
                         suffixIcon: CupertinoButton(
-                            child: const Icon(
-                              Icons.visibility,
-                              color: Colors.grey,
-                            ),
+                            // child: const Icon(
+                            //   Icons.visibility,
+                            //   color: Colors.grey,
+                            // ),
                             onPressed: () {
                               setState(() {
                                 isShowPassword = !isShowPassword;
                               });
-                            }),
+                            },
+                            child: Icon(
+                              isShowPassword
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color: Colors.grey,
+                            )),
                         hintText: "Password"),
                     obscureText: isShowPassword,
                   ),
