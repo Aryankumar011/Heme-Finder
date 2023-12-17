@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:home_finder_new/constants/routes.dart';
+import 'package:home_finder_new/screens/auth_ui/Home/home.dart';
 import 'package:home_finder_new/screens/auth_ui/sign_up/sign_up.dart';
 import 'package:home_finder_new/widgets/primarybutton/primary_button.dart';
 import 'package:home_finder_new/widgets/top_titles/top_titleles.dart';
@@ -77,8 +78,8 @@ class _LoginState extends State<Login> {
                 child: CupertinoButton(
                   child: const Text('Create an Account'),
                   onPressed: () {
-                    Routes.instance
-                        .push(widget: const SignUp(), context: context);
+                    Routes.instance.pushAndRemoveUntill(
+                        widget: const Home(), context: context);
                   },
                 ),
               ),

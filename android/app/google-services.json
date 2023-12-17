@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "796635902916",
+    "project_id": "home-finder-new",
+    "storage_bucket": "home-finder-new.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:796635902916:android:26ba3e292e4322b23eaa91",
+        "android_client_info": {
+          "package_name": "com.example.home_finder_new"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCR0jllzHAr7L_-4cOoi_QhZUjMtQFIcak"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
