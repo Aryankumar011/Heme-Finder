@@ -1,18 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:home_finder_new/constants/routes.dart';
-import 'package:home_finder_new/screens/auth_ui/sign_up/sign_up.dart';
+import 'package:home_finder_new/screens/auth_ui/login/login.dart';
 import 'package:home_finder_new/widgets/primarybutton/primary_button.dart';
 import 'package:home_finder_new/widgets/top_titles/top_titleles.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class SignUp extends StatefulWidget {
+  const SignUp({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _LoginState extends State<Login> {
+class _SignUpState extends State<SignUp> {
   bool isShowPassword = true;
   @override
   Widget build(BuildContext context) {
@@ -27,18 +27,33 @@ class _LoginState extends State<Login> {
               // Icon(Icons.arrow_back),
               const TopTitles(
                 subTitle: "Welcome Back To Home Finder App",
-                title: "Login",
+                title: "Create Account",
               ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Column(children: [
+                  TextFormField(
+                    decoration: const InputDecoration(
+                        prefixIcon: Icon(Icons.person), hintText: "Name"),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
                   TextFormField(
                     keyboardType: TextInputType.emailAddress,
                     decoration: const InputDecoration(
                         prefixIcon: Icon(Icons.mail), hintText: "Email"),
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 15,
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.phone,
+                    decoration: const InputDecoration(
+                        prefixIcon: Icon(Icons.phone), hintText: "Phone"),
+                  ),
+                  const SizedBox(
+                    height: 15,
                   ),
                   TextFormField(
                     decoration: InputDecoration(
@@ -62,17 +77,15 @@ class _LoginState extends State<Login> {
                   PrimaryButton(onPressed: () {}, title: "Login"),
                 ]),
               ),
-              const Center(child: Text("Don't have an Account ?")),
+              const Center(child: Text("I have already an Account")),
               const SizedBox(
-                height: 12,
+                height: 5,
               ),
-
               Center(
                 child: CupertinoButton(
-                  child: const Text('Create an Account'),
+                  child: const Text('Login'),
                   onPressed: () {
-                    Routes.instance
-                        .push(widget: const SignUp(), context: context);
+                    Routes.instance.push(widget: Login(), context: context);
                   },
                 ),
               ),

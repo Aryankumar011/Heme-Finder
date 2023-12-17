@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:home_finder_new/constants/assets_images.dart';
 import 'package:home_finder_new/constants/routes.dart';
 import 'package:home_finder_new/screens/auth_ui/login/login.dart';
+import 'package:home_finder_new/screens/auth_ui/sign_up/sign_up.dart';
 import 'package:home_finder_new/widgets/primarybutton/primary_button.dart';
 import 'package:home_finder_new/widgets/top_titles/top_titleles.dart';
 
@@ -39,7 +40,11 @@ class Welcome extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            PrimaryButton(onPressed: () {}, title: 'Sign Up'),
+            PrimaryButton(
+                onPressed: () {
+                  Routes.instance.push(widget: SignUp(), context: context);
+                },
+                title: 'Sign Up'),
           ],
         ),
       ),

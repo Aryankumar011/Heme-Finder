@@ -7,39 +7,36 @@ class TopTitles extends StatelessWidget {
   const TopTitles({super.key, required this.title, required this.subTitle});
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: kToolbarHeight - 10,
-          ),
-          if (title == "Login" || title == "Create Account")
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).pop();
-              },
-              child: const Icon(
-                Icons.arrow_back,
-                size: 30,
-              ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          height: kToolbarHeight,
+        ),
+        if (title == "Login" || title == "Create Account")
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            child: const Icon(
+              Icons.arrow_back,
+              size: 30,
             ),
-          SizedBox(
-            height: 10,
           ),
-          // BackButton(),
-          Text(title,
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-          Text(subTitle,
-              style: TextStyle(
-                fontSize: 20,
-              )),
-          const SizedBox(
-            height: 20,
-          ),
-        ],
-      ),
+        SizedBox(
+          height: 10,
+        ),
+        // BackButton(),
+        Text(title,
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+        Text(subTitle,
+            style: TextStyle(
+              fontSize: 20,
+            )),
+        const SizedBox(
+          height: 20,
+        ),
+      ],
     );
   }
 }
