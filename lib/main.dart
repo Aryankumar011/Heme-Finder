@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:home_finder_new/constants/theme.dart';
 import 'package:home_finder_new/firebase_helper/firebase_auth_helper/firebase_auth_helper.dart';
 import 'package:home_finder_new/firebase_helper/firebase_options/firebase_options.dart';
-import 'package:home_finder_new/screens/auth_ui/Home/home.dart';
+import 'package:home_finder_new/screens/Home/home.dart';
 import 'package:home_finder_new/screens/auth_ui/welcome/welcome.dart';
 
 void main() async {
