@@ -1,6 +1,6 @@
 {
-    "name": "home_finder_new",
-    "short_name": "home_finder_new",
+    "name": "Home Finder",
+    "short_name": "Home Finder",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
