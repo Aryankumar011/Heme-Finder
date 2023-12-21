@@ -91,6 +91,7 @@ class _SignUpState extends State<SignUp> {
                 child: CupertinoButton(
                   child: const Text('Login'),
                   onPressed: () {
+                    Navigator.of(context).pop();
                     Routes.instance.push(widget: Login(), context: context);
                   },
                 ),

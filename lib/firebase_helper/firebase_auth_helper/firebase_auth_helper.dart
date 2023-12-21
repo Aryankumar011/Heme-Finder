@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:home_finder_new/constants/routes.dart';
-import 'package:home_finder_new/screens/auth_ui/Home/home.dart';
+import 'package:home_finder_new/screens/Home/home.dart';
 
 class FirebaseAuthHelper {
   final FirebaseAuth _auth = FirebaseAuth.instance;
