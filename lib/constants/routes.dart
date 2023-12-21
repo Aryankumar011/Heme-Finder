@@ -4,7 +4,7 @@ class Routes {
   static Routes instance = Routes();
 
   // ignore: non_constant_identifier_names
-  Future<dynamic> pushAndRemoveUntill({required widget, required context}) {
+  Future<dynamic> pushAndRemoveUntil({required widget, required context}) {
     return Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
           builder: (context) => widget,

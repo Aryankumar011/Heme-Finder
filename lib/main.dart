@@ -1,9 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:home_finder_new/constants/theme.dart';
+import 'package:home_finder_new/firebase_helper/firebase_auth_helper/firebase_auth_helper.dart';
+import 'package:home_finder_new/firebase_helper/firebase_options/firebase_options.dart';
+import 'package:home_finder_new/screens/Home/home.dart';
 import 'package:home_finder_new/screens/auth_ui/welcome/welcome.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -15,7 +21,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Home Finder',
       theme: themeData,
-      home: Welcome(),
+      home: StreamBuilder(
+        stream: FirebaseAuthHelper.instance.getAuthChange,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Home();
+          }
+          return Welcome();
+        },
+      ),
       // home: const MyHomePage(title: 'My Home Finding'),
       debugShowCheckedModeBanner: false,
     );

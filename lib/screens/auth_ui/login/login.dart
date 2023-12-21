@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:home_finder_new/constants/conststants.dart';
 import 'package:home_finder_new/constants/routes.dart';
+import 'package:home_finder_new/firebase_helper/firebase_auth_helper/firebase_auth_helper.dart';
 import 'package:home_finder_new/screens/Home/home.dart';
 import 'package:home_finder_new/screens/auth_ui/sign_up/sign_up.dart';
 import 'package:home_finder_new/widgets/primarybutton/primary_button.dart';
@@ -15,6 +17,8 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   bool isShowPassword = true;
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,7 +70,20 @@ class _LoginState extends State<Login> {
                   const SizedBox(
                     height: 30,
                   ),
-                  PrimaryButton(onPressed: () {}, title: "Login"),
+                  PrimaryButton(
+                      onPressed: () async {
+                        bool isVaildated =
+                            loginVaildation(email.text, password.text);
+                        if (isVaildated) {
+                          bool isLogined = await FirebaseAuthHelper.instance
+                              .login(email.text, password.text, context);
+                          if (isLogined) {
+                            Routes.instance.pushAndRemoveUntil(
+                                widget: const Home(), context: context);
+                          }
+                        }
+                      },
+                      title: "Login"),
                 ]),
               ),
               const Center(child: Text("Don't have an Account ?")),
