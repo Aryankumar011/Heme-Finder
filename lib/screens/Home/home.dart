@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:home_finder_new/constants/routes.dart';
 import 'package:home_finder_new/firebase_helper/firebase_auth_helper/firebase_auth_helper.dart';
 import 'package:home_finder_new/models/product_model/product_model.dart';
+import 'package:home_finder_new/screens/NavDrawer/navdrawer.dart';
 import 'package:home_finder_new/screens/auth_ui/welcome/welcome.dart';
 
 class Home extends StatelessWidget {
@@ -10,32 +11,21 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: NavDrawer(),
       appBar: AppBar(
+        // leading: Icon(Icons.list),
         backgroundColor: Colors.red,
-        title: Row(
-          children: [
-            Text("Home Finder"),
-            if (kIsWeb)
-              SizedBox(
-                width: double.minPositive,
-              )
-            else
-              SizedBox(
-                width: 145,
-              ),
-            Align(
-              alignment: Alignment.topRight,
-              child: IconButton(
-                icon: Icon(Icons.logout),
-                onPressed: () {
-                  FirebaseAuthHelper.instance.signOut();
-                  Navigator.of(context).pop();
-                  Routes.instance.push(widget: Welcome(), context: context);
-                },
-              ),
-            ),
-          ],
-        ),
+        title: Text("Home Finder"),
+        /*  actions: [
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: () {
+              FirebaseAuthHelper.instance.signOut();
+              Navigator.of(context).pop();
+              Routes.instance.push(widget: Welcome(), context: context);
+            },
+          ),
+        ], */
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -117,7 +107,7 @@ class Home extends StatelessWidget {
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   mainAxisSpacing: 12.0,
-                  childAspectRatio: .6,
+                  childAspectRatio: .75,
                   crossAxisSpacing: 12.0),
               itemBuilder: (context, index) {
                 ProductModel singleHome = bestHome[index];
