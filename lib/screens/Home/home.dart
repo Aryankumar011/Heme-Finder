@@ -1,10 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:home_finder_new/constants/routes.dart';
-import 'package:home_finder_new/firebase_helper/firebase_auth_helper/firebase_auth_helper.dart';
 import 'package:home_finder_new/models/product_model/product_model.dart';
 import 'package:home_finder_new/screens/NavDrawer/navdrawer.dart';
-import 'package:home_finder_new/screens/auth_ui/welcome/welcome.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -136,9 +132,12 @@ class Home extends StatelessWidget {
                             onPressed: () {},
                             child: Text(
                               "Buy",
-                              style: TextStyle(color: Colors.red),
+                              style: TextStyle(
+                                color: Colors.red,
+                              ),
                             ),
                             style: OutlinedButton.styleFrom(
+                                shadowColor: Colors.red,
                                 side:
                                     BorderSide(color: Colors.red, width: 1.6)),
                           ),

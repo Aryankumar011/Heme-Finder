@@ -20,6 +20,9 @@ class NavDrawer extends StatelessWidget {
                 image: DecorationImage(
                     fit: BoxFit.fill,
                     image: AssetImage('assets/images/facebook.png'))),
+            // image: NetworkImage(
+            //   "https://drive.google.com/uc?export=view&id=1XE8JnGc056qDu985UZ54b9vH6cXDJMdL",
+            // scale: 2.0))),
           ),
           ListTile(
             leading: Icon(Icons.input),
