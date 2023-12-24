@@ -103,7 +103,7 @@ class Home extends StatelessWidget {
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   mainAxisSpacing: 12.0,
-                  childAspectRatio: .75,
+                  childAspectRatio: .73,
                   crossAxisSpacing: 12.0),
               itemBuilder: (context, index) {
                 ProductModel singleHome = bestHome[index];
