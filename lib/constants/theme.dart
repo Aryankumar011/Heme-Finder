@@ -12,6 +12,14 @@ ThemeData themeData = ThemeData(
       prefixIconColor: Colors.grey,
       suffixIconColor: Colors.grey,
     ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+            foregroundColor: Colors.red,
+            textStyle: const TextStyle(
+              color: Colors.red,
+            ),
+            side: BorderSide(color: Colors.red, width: 1.7),
+            disabledForegroundColor: Colors.red.withOpacity(0.38))),
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
             backgroundColor: Colors.red,
