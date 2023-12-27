@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:home_finder_new/constants/routes.dart';
 import 'package:home_finder_new/firebase_helper/firebase_firestore_helper/firebase_firestore.dart';
 import 'package:home_finder_new/models/category_model/category_model.dart';
 import 'package:home_finder_new/models/product_model/product_model.dart';
 import 'package:home_finder_new/screens/NavDrawer/navdrawer.dart';
+import 'package:home_finder_new/screens/product_details/product_details.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -42,6 +44,10 @@ class _HomeState extends State<Home> {
     return Scaffold(
       drawer: NavDrawer(),
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.white,
+        ),
+
         actions: [
           IconButton(
             icon: Icon(Icons.refresh),
@@ -52,7 +58,10 @@ class _HomeState extends State<Home> {
         ],
         // leading: Icon(Icons.list),
         backgroundColor: Colors.red,
-        title: Text("Home Finder"),
+        title: Text(
+          "Home Finder",
+          style: TextStyle(color: Colors.white),
+        ),
         /*  actions: [
           IconButton(
             icon: Icon(Icons.logout),
@@ -99,15 +108,17 @@ class _HomeState extends State<Home> {
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(15)),
-                                    color: Colors.white,
+                                    color: Colors.red.withOpacity(.7),
                                     child: Container(
                                       height: 120,
                                       width: 100,
                                       child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
                                         children: [
                                           Container(
-                                            height: 100,
-                                            width: 100,
+                                            height: 85,
+                                            width: 85,
                                             child: Image.network(e.image),
                                             // Image(
                                             //     image: NetworkImage(e
@@ -201,7 +212,13 @@ class _HomeState extends State<Home> {
                                         Container(
                                           width: 120,
                                           child: OutlinedButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              Routes.instance.push(
+                                                  widget: ProductDetails(
+                                                      singleProduct:
+                                                          singleHome),
+                                                  context: context);
+                                            },
                                             child: Text(
                                               "Buy",
                                               style: TextStyle(

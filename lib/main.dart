@@ -5,6 +5,7 @@ import 'package:home_finder_new/firebase_helper/firebase_auth_helper/firebase_au
 import 'package:home_finder_new/firebase_helper/firebase_options/firebase_options.dart';
 import 'package:home_finder_new/screens/Home/home.dart';
 import 'package:home_finder_new/screens/auth_ui/welcome/welcome.dart';
+import 'package:home_finder_new/screens/splash_screen/splashscreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Home Finder',
       theme: themeData,
-      home: StreamBuilder(
+      home: SplashScreen(),
+      /* StreamBuilder(
         stream: FirebaseAuthHelper.instance.getAuthChange,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
@@ -30,13 +32,27 @@ class MyApp extends StatelessWidget {
           }
           return Welcome();
         },
-      ),
+      ), */
       // home: const MyHomePage(title: 'My Home Finding'),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
+class InitHome extends StatelessWidget {
+  @override
+  Widget build(Object context) {
+    return StreamBuilder(
+      stream: FirebaseAuthHelper.instance.getAuthChange,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Home();
+        }
+        return Welcome();
+      },
+    );
+  }
+}
 // class MyHomePage extends StatefulWidget {
 //   const MyHomePage({super.key, required this.title});
 //   final String title;
