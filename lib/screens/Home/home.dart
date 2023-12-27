@@ -13,6 +13,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<CategoryModel> categoryList = [];
+  List<ProductModel> productModelList = [];
 
   bool isLoading = false;
   @override
@@ -28,6 +29,9 @@ class _HomeState extends State<Home> {
       isLoading = true;
     });
     categoryList = await FirebaseFirestoreHelper.instance.getCategories();
+    productModelList = await FirebaseFirestoreHelper.instance.getBestProducts();
+    categoryList.shuffle();
+    productModelList.shuffle();
     setState(() {
       isLoading = false;
     });
@@ -158,60 +162,68 @@ class _HomeState extends State<Home> {
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       ),
-                      GridView.builder(
-                        shrinkWrap: true,
-                        primary: false,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            mainAxisSpacing: 12.0,
-                            childAspectRatio: .6,
-                            crossAxisSpacing: 12.0),
-                        itemBuilder: (context, index) {
-                          ProductModel singleHome = bestHome[index];
-                          return Container(
-                            decoration: BoxDecoration(
-                              color: Colors.red.withOpacity(.3),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  // Image.network(
-                                  Image.asset(
-                                    singleHome.image,
-                                    height: 100,
-                                    width: 100,
+                      categoryList.isEmpty
+                          ? Center(
+                              child: Text("Top Visited Homes Is Empty"),
+                            )
+                          : GridView.builder(
+                              shrinkWrap: true,
+                              primary: false,
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      mainAxisSpacing: 12.0,
+                                      childAspectRatio: .6,
+                                      crossAxisSpacing: 12.0),
+                              itemBuilder: (context, index) {
+                                ProductModel singleHome =
+                                    productModelList[index];
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.red.withOpacity(.3),
+                                    borderRadius: BorderRadius.circular(10),
                                   ),
-                                  Text("Name : ${singleHome.name}"),
-                                  // Text("Location : ${singleHome.location}"),
-                                  Text("Location :"),
-                                  Text(singleHome.location),
-                                  Text("Price: ${singleHome.price}"),
-                                  Container(
-                                    width: 120,
-                                    child: OutlinedButton(
-                                      onPressed: () {},
-                                      child: Text(
-                                        "Buy",
-                                        style: TextStyle(
-                                          color: Colors.red,
+                                  child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Image.network(
+                                          // Image.asset(
+                                          singleHome.image,
+                                          height: 100,
+                                          width: 100,
                                         ),
-                                      ),
-                                      style: OutlinedButton.styleFrom(
-                                        disabledForegroundColor:
-                                            Colors.red.withOpacity(0.38),
-                                        shadowColor: Colors.red,
-                                        foregroundColor: Colors.red,
-                                        side: BorderSide(
-                                            color: Colors.red, width: 1.6),
-                                      ),
-                                    ),
-                                  )
-                                ]),
-                          );
-                        },
-                        itemCount: bestHome.length,
-                      )
+                                        Text("Name : ${singleHome.name}"),
+                                        // Text("Location : ${singleHome.location}"),
+                                        Text("Location :"),
+                                        Text(singleHome.location),
+                                        Text("Price: ${singleHome.price}"),
+                                        Container(
+                                          width: 120,
+                                          child: OutlinedButton(
+                                            onPressed: () {},
+                                            child: Text(
+                                              "Buy",
+                                              style: TextStyle(
+                                                color: Colors.red,
+                                              ),
+                                            ),
+                                            style: OutlinedButton.styleFrom(
+                                              disabledForegroundColor:
+                                                  Colors.red.withOpacity(0.38),
+                                              shadowColor: Colors.red,
+                                              foregroundColor: Colors.red,
+                                              side: BorderSide(
+                                                  color: Colors.red,
+                                                  width: 1.6),
+                                            ),
+                                          ),
+                                        )
+                                      ]),
+                                );
+                              },
+                              itemCount: productModelList.length,
+                            )
                     ]),
               ),
             ),
