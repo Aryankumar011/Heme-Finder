@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:home_finder_new/constants/routes.dart';
 import 'package:home_finder_new/firebase_helper/firebase_firestore_helper/firebase_firestore.dart';
 import 'package:home_finder_new/models/category_model/category_model.dart';
 import 'package:home_finder_new/models/product_model/product_model.dart';
 import 'package:home_finder_new/screens/NavDrawer/navdrawer.dart';
+import 'package:home_finder_new/screens/category_view/category_view.dart';
 import 'package:home_finder_new/screens/product_details/product_details.dart';
 
 class Home extends StatefulWidget {
@@ -103,12 +105,20 @@ class _HomeState extends State<Home> {
                         physics: AlwaysScrollableScrollPhysics(),
                         child: Row(
                           children: categoryList
-                              .map((e) => Card(
+                              .map(
+                                (e) => CupertinoButton(
+                                  padding: EdgeInsets.all(0),
+                                  onPressed: () {
+                                    Routes.instance.push(
+                                        widget: CategoryView(categoryModel: e),
+                                        context: context);
+                                  },
+                                  child: Card(
                                     elevation: 6.1,
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(15)),
-                                    color: Colors.red.withOpacity(.7),
+                                    color: Colors.red.withOpacity(.25),
                                     child: Container(
                                       height: 120,
                                       width: 100,
@@ -134,7 +144,9 @@ class _HomeState extends State<Home> {
                                         ],
                                       ),
                                     ),
-                                  ))
+                                  ),
+                                ),
+                              )
                               .toList(),
                         ),
                       )
