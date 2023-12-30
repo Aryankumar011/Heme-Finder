@@ -1,8 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:home_finder_new/constants/conststants.dart';
+import 'package:home_finder_new/models/product_model/product_model.dart';
+import 'package:home_finder_new/provider/app_provider.dart';
+import 'package:provider/provider.dart';
 
 class SingleCarttItem extends StatefulWidget {
-  const SingleCarttItem({super.key});
+  final ProductModel singleProduct;
+
+  const SingleCarttItem({super.key, required this.singleProduct});
 
   @override
   State<SingleCarttItem> createState() => _SingleCarttItemState();
@@ -18,45 +24,68 @@ class _SingleCarttItemState extends State<SingleCarttItem> {
           Expanded(
               // flex: 1,
               child: Container(
-            child: Image.network("https://picsum.photos/99/101.jpg"),
-            height: 110,
+            child: Image.network(widget.singleProduct.image),
+            height: 100,
             color: Colors.red.withOpacity(.3),
           )), // Image.network("https://picsum.photos/99/101.jpg")),
           Expanded(
               flex: 2,
               child: Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                child: Stack(
+                  alignment: Alignment.bottomRight,
                   children: [
-                    Column(
-                      // crossAxisAlignment: CrossAxisAlignment.stretch,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Name :Aryan Panchal",
-                            style: TextStyle(
-                              fontSize: 15,
-                            )),
-                        // Text("Location : ${singleHome.location}"),
-                        Text("Location : Vadodara ",
-                            style: TextStyle(
-                              fontSize: 15,
-                            )),
-                        // Text(""),
-                        Text(
-                          "Price: 100L",
-                          style: TextStyle(
-                            fontSize: 15,
-                          ),
-                        ),
-                        CupertinoButton(
-                            padding: EdgeInsets.all(0),
-                            child: Text("Add To Wishlist",
-                                style:
-                                    TextStyle(fontSize: 12, color: Colors.red)),
-                            onPressed: () {})
+                        Column(
+                          // crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Text("Name : ${widget.singleProduct.name}",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                )),
+                            // Text("Location : ${singleHome.location}"),
+                            Text("Location : ${widget.singleProduct.location}",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                )),
+                            // Text(""),
+                            Text(
+                              "Price: ${widget.singleProduct.price}",
+                              style: TextStyle(
+                                fontSize: 15,
+                              ),
+                            ),
+                            CupertinoButton(
+                                padding: EdgeInsets.all(0),
+                                minSize: 0,
+                                child: Text("Add To Wishlist",
+                                    style: TextStyle(
+                                        fontSize: 15, color: Colors.red)),
+                                onPressed: () {})
+                          ],
+                        )
                       ],
-                    )
+                    ),
+                    CupertinoButton(
+                        minSize: 0,
+                        padding: EdgeInsets.all(0),
+                        child: Icon(
+                          Icons.delete,
+                          color: Colors.red,
+                        ),
+                        // child: Text("Remove From Cart",
+                        //     style:
+                        //         TextStyle(fontSize: 12, color: Colors.red)),
+                        onPressed: () {
+                          AppProvider appProvider =
+                              Provider.of<AppProvider>(context, listen: false);
+                          appProvider.removeCartProduct(widget.singleProduct);
+                          showMessage("Removed From To Cart");
+                        })
                   ],
                 ),
+
                 // color: Colors.black.withOpacity(.5),
               ))
         ],

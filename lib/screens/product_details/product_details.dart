@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:home_finder_new/constants/conststants.dart';
 import 'package:home_finder_new/constants/routes.dart';
 import 'package:home_finder_new/models/product_model/product_model.dart';
+import 'package:home_finder_new/provider/app_provider.dart';
 import 'package:home_finder_new/screens/cart_screen/cart_screen.dart';
+import 'package:provider/provider.dart';
 
 class ProductDetails extends StatefulWidget {
   const ProductDetails({super.key, required this.singleProduct});
@@ -74,7 +77,16 @@ class _ProductDetailsState extends State<ProductDetails> {
                     width: 150,
                     child: OutlinedButton(
                       style: ButtonStyle(),
-                      onPressed: () {},
+                      onPressed: () {
+                        AppProvider appProvider =
+                            Provider.of<AppProvider>(context, listen: false);
+                        if (appProvider.getcartProductList
+                            .contains(widget.singleProduct)) {
+                          showMessage("Already In Cart");
+                        } else
+                          appProvider.addCartProduct(widget.singleProduct);
+                        showMessage("Added To Cart");
+                      },
                       child: Text(
                         "Add To Cart",
                         style: TextStyle(color: Colors.red),
