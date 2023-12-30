@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:home_finder_new/constants/routes.dart';
 import 'package:home_finder_new/models/product_model/product_model.dart';
+import 'package:home_finder_new/screens/cart_screen/cart_screen.dart';
 
 class ProductDetails extends StatefulWidget {
   const ProductDetails({super.key, required this.singleProduct});
@@ -15,7 +17,11 @@ class _ProductDetailsState extends State<ProductDetails> {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart)),
+          IconButton(
+              onPressed: () {
+                Routes.instance.push(widget: CartScreen(), context: context);
+              },
+              icon: Icon(Icons.shopping_cart)),
         ],
       ),
       body: Padding(
