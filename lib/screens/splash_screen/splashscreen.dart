@@ -34,6 +34,9 @@ class _SplashScreenState extends State<SplashScreen> {
               "Created By : Aryan Panchal",
               style: TextStyle(fontSize: 10.0),
             ),
+            SizedBox(
+              height: 2,
+            ),
             Text(
               "©aryanpanchal.me",
               style: TextStyle(fontSize: 10.0),

@@ -83,9 +83,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                         if (appProvider.getcartProductList
                             .contains(widget.singleProduct)) {
                           showMessage("Already In Cart");
-                        } else
+                        } else {
                           appProvider.addCartProduct(widget.singleProduct);
-                        showMessage("Added To Cart");
+                          showMessage("Added To Cart");
+                        }
                       },
                       child: Text(
                         "Add To Cart",
