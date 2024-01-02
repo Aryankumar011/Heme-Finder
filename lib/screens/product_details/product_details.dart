@@ -120,6 +120,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                     ),
                   ),
                 ],
+              ),
+              SizedBox(
+                height: 50,
               )
             ],
           ),

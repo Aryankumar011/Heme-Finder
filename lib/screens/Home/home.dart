@@ -88,69 +88,68 @@ class _HomeState extends State<Home> {
               padding: const EdgeInsets.all(8.0),
               child: SingleChildScrollView(
                 child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TextFormField(
-                        decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.search),
-                            hintText: "Search..."),
-                      ),
-                      Text(
-                        "Categories",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        physics: AlwaysScrollableScrollPhysics(),
-                        child: Row(
-                          children: categoryList
-                              .map(
-                                (e) => CupertinoButton(
-                                  padding: EdgeInsets.all(0),
-                                  onPressed: () {
-                                    Routes.instance.push(
-                                        widget: CategoryView(categoryModel: e),
-                                        context: context);
-                                  },
-                                  child: Card(
-                                    elevation: 6.1,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(15)),
-                                    color: Colors.red.withOpacity(.25),
-                                    child: Container(
-                                      height: 120,
-                                      width: 100,
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Container(
-                                            height: 85,
-                                            width: 85,
-                                            child: Image.network(e.image),
-                                            // Image(
-                                            //     image: NetworkImage(e
-                                            //         .image)) // Image.network(e.image),
-                                            // child: Image.network(e["Source"]),
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TextFormField(
+                      decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.search),
+                          hintText: "Search..."),
+                    ),
+                    Text(
+                      "Categories",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      physics: AlwaysScrollableScrollPhysics(),
+                      child: Row(
+                        children: categoryList
+                            .map(
+                              (e) => CupertinoButton(
+                                padding: EdgeInsets.all(0),
+                                onPressed: () {
+                                  Routes.instance.push(
+                                      widget: CategoryView(categoryModel: e),
+                                      context: context);
+                                },
+                                child: Card(
+                                  elevation: 6.1,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15)),
+                                  color: Colors.red.withOpacity(.25),
+                                  child: Container(
+                                    height: 120,
+                                    width: 100,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Container(
+                                          height: 85,
+                                          width: 85,
+                                          child: Image.network(e.image),
+                                          // Image(
+                                          //     image: NetworkImage(e
+                                          //         .image)) // Image.network(e.image),
+                                          // child: Image.network(e["Source"]),
+                                        ),
+                                        Text(
+                                          e.name,
+                                          style: TextStyle(
+                                            fontSize: 10.0,
                                           ),
-                                          Text(
-                                            e.name,
-                                            style: TextStyle(
-                                              fontSize: 10.0,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
-                              )
-                              .toList(),
-                        ),
-                      )
-                      /* SingleChildScrollView(
+                              ),
+                            )
+                            .toList(),
+                      ),
+                    )
+                    /* SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: categories
@@ -176,84 +175,84 @@ class _HomeState extends State<Home> {
                     .toList(),
               ),
                       ) */
-                      ,
-                      Padding(
-                        padding: EdgeInsets.only(top: 10, bottom: 10),
-                        child: Text(
-                          "Top Visited Homes",
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
+                    ,
+                    Padding(
+                      padding: EdgeInsets.only(top: 10, bottom: 10),
+                      child: Text(
+                        "Top Visited Homes",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
-                      categoryList.isEmpty
-                          ? Center(
-                              child: Text("Top Visited Homes Is Empty"),
-                            )
-                          : GridView.builder(
-                              shrinkWrap: true,
-                              primary: false,
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      mainAxisSpacing: 12.0,
-                                      childAspectRatio: .6,
-                                      crossAxisSpacing: 12.0),
-                              itemBuilder: (context, index) {
-                                ProductModel singleHome =
-                                    productModelList[index];
-                                return Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.red.withOpacity(.3),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Image.network(
-                                          // Image.asset(
-                                          singleHome.image,
-                                          height: 100,
-                                          width: 100,
-                                        ),
-                                        Text("Name : ${singleHome.name}"),
-                                        // Text("Location : ${singleHome.location}"),
-                                        Text("Location :"),
-                                        Text(singleHome.location),
-                                        Text("Price: ${singleHome.price}"),
-                                        Container(
-                                          width: 120,
-                                          child: OutlinedButton(
-                                            onPressed: () {
-                                              Routes.instance.push(
-                                                  widget: ProductDetails(
-                                                      singleProduct:
-                                                          singleHome),
-                                                  context: context);
-                                            },
-                                            child: Text(
-                                              "Buy",
-                                              style: TextStyle(
-                                                color: Colors.red,
-                                              ),
-                                            ),
-                                            style: OutlinedButton.styleFrom(
-                                              disabledForegroundColor:
-                                                  Colors.red.withOpacity(0.38),
-                                              shadowColor: Colors.red,
-                                              foregroundColor: Colors.red,
-                                              side: BorderSide(
-                                                  color: Colors.red,
-                                                  width: 1.6),
+                    ),
+                    categoryList.isEmpty
+                        ? Center(
+                            child: Text("Top Visited Homes Is Empty"),
+                          )
+                        : GridView.builder(
+                            shrinkWrap: true,
+                            primary: false,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    mainAxisSpacing: 12.0,
+                                    childAspectRatio: .6,
+                                    crossAxisSpacing: 12.0),
+                            itemBuilder: (context, index) {
+                              ProductModel singleHome = productModelList[index];
+                              return Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.red.withOpacity(.3),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.network(
+                                        // Image.asset(
+                                        singleHome.image,
+                                        height: 100,
+                                        width: 100,
+                                      ),
+                                      Text("Name : ${singleHome.name}"),
+                                      // Text("Location : ${singleHome.location}"),
+                                      Text("Location :"),
+                                      Text(singleHome.location),
+                                      Text("Price: ${singleHome.price}"),
+                                      Container(
+                                        width: 120,
+                                        child: OutlinedButton(
+                                          onPressed: () {
+                                            Routes.instance.push(
+                                                widget: ProductDetails(
+                                                    singleProduct: singleHome),
+                                                context: context);
+                                          },
+                                          child: Text(
+                                            "Buy",
+                                            style: TextStyle(
+                                              color: Colors.red,
                                             ),
                                           ),
-                                        )
-                                      ]),
-                                );
-                              },
-                              itemCount: productModelList.length,
-                            )
-                    ]),
+                                          style: OutlinedButton.styleFrom(
+                                            disabledForegroundColor:
+                                                Colors.red.withOpacity(0.38),
+                                            shadowColor: Colors.red,
+                                            foregroundColor: Colors.red,
+                                            side: BorderSide(
+                                                color: Colors.red, width: 1.6),
+                                          ),
+                                        ),
+                                      )
+                                    ]),
+                              );
+                            },
+                            itemCount: productModelList.length,
+                          ),
+                    SizedBox(
+                      height: 50,
+                    )
+                  ],
+                ),
               ),
             ),
     );
