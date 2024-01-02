@@ -6,6 +6,7 @@ import 'package:home_finder_new/firebase_helper/firebase_options/firebase_option
 import 'package:home_finder_new/provider/app_provider.dart';
 import 'package:home_finder_new/screens/Home/home.dart';
 import 'package:home_finder_new/screens/auth_ui/welcome/welcome.dart';
+import 'package:home_finder_new/screens/custom_bottom_bar/custom_bottom_bar.dart';
 import 'package:home_finder_new/screens/splash_screen/splashscreen.dart';
 import 'package:provider/provider.dart';
 
@@ -50,7 +51,8 @@ class InitHome extends StatelessWidget {
       stream: FirebaseAuthHelper.instance.getAuthChange,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return Home();
+          // return Home();
+          return CustomBottomBar();
         }
         return Welcome();
       },
