@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:home_finder_new/screens/Home/home.dart';
+import 'package:home_finder_new/screens/account_screen.dart/account_screen.dart';
 import 'package:home_finder_new/screens/cart_screen/cart_screen.dart';
 import 'package:home_finder_new/screens/favourite_screen/favourite_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -21,7 +22,8 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
         Home(),
         CartScreen(),
         FavouriteScreen(),
-        FavouriteScreen(),
+        // FavouriteScreen(),
+        AccountScreen()
       ];
 
   List<PersistentBottomNavBarItem> _navBarsItems() => [
