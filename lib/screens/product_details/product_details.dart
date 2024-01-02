@@ -4,6 +4,7 @@ import 'package:home_finder_new/constants/routes.dart';
 import 'package:home_finder_new/models/product_model/product_model.dart';
 import 'package:home_finder_new/provider/app_provider.dart';
 import 'package:home_finder_new/screens/cart_screen/cart_screen.dart';
+import 'package:home_finder_new/screens/favourite_screen/favourite_screen.dart';
 import 'package:provider/provider.dart';
 
 class ProductDetails extends StatefulWidget {
@@ -17,6 +18,9 @@ class ProductDetails extends StatefulWidget {
 class _ProductDetailsState extends State<ProductDetails> {
   @override
   Widget build(BuildContext context) {
+    AppProvider appProvider = Provider.of<AppProvider>(
+      context,
+    );
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -52,6 +56,14 @@ class _ProductDetailsState extends State<ProductDetails> {
                         widget.singleProduct.isFavourite =
                             !widget.singleProduct.isFavourite;
                         setState(() {});
+                        if (widget.singleProduct.isFavourite) {
+                          appProvider.addFavoriteProduct(widget.singleProduct);
+                          showMessage("Added Into Favourite...");
+                        } else {
+                          appProvider
+                              .removeFavoriteProduct(widget.singleProduct);
+                          showMessage("Removed From Favourite....");
+                        }
                       },
                       icon: Icon(
                         widget.singleProduct.isFavourite
@@ -78,8 +90,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                     child: OutlinedButton(
                       style: ButtonStyle(),
                       onPressed: () {
-                        AppProvider appProvider =
-                            Provider.of<AppProvider>(context, listen: false);
+                        // AppProvider appProvider =
+                        //     Provider.of<AppProvider>(context, listen: false);
                         if (appProvider.getcartProductList
                             .contains(widget.singleProduct)) {
                           showMessage("Already In Cart");
@@ -97,7 +109,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                   Container(
                     width: 150,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Routes.instance
+                            .push(widget: FavouriteScreen(), context: context);
+                      },
                       child: Text(
                         "BUY",
                         style: TextStyle(color: Colors.white),

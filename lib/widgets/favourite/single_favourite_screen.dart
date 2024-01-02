@@ -5,16 +5,16 @@ import 'package:home_finder_new/models/product_model/product_model.dart';
 import 'package:home_finder_new/provider/app_provider.dart';
 import 'package:provider/provider.dart';
 
-class SingleCarttItem extends StatefulWidget {
+class SingleFavouritetItem extends StatefulWidget {
   final ProductModel singleProduct;
 
-  const SingleCarttItem({super.key, required this.singleProduct});
+  const SingleFavouritetItem({super.key, required this.singleProduct});
 
   @override
-  State<SingleCarttItem> createState() => _SingleCarttItemState();
+  State<SingleFavouritetItem> createState() => _SingleFavouritetItemState();
 }
 
-class _SingleCarttItemState extends State<SingleCarttItem> {
+class _SingleFavouritetItemState extends State<SingleFavouritetItem> {
   @override
   Widget build(BuildContext context) {
     AppProvider appProvider = Provider.of<AppProvider>(
@@ -62,46 +62,38 @@ class _SingleCarttItemState extends State<SingleCarttItem> {
                             CupertinoButton(
                                 padding: EdgeInsets.all(0),
                                 minSize: 0,
-                                child: Text(
-                                    appProvider.getFavoriteProductList
-                                            .contains(widget.singleProduct)
-                                        ? "remove To Wishlist "
-                                        : "Add Wishlist",
+                                child: Text("Remove To Wishlist",
                                     style: TextStyle(
                                         fontSize: 15, color: Colors.red)),
                                 onPressed: () {
-                                  if (!appProvider.getFavoriteProductList
-                                      .contains(widget.singleProduct)) {
-                                    appProvider.addFavoriteProduct(
-                                        widget.singleProduct);
-                                    showMessage("Added Into Favourite...");
-                                  } else {
-                                    appProvider.removeFavoriteProduct(
-                                        widget.singleProduct);
-                                    showMessage("Removed From Favourite....");
-                                  }
-                                  // setState(() {});
+                                  AppProvider appProvider =
+                                      Provider.of<AppProvider>(context,
+                                          listen: false);
+                                  appProvider.removeFavoriteProduct(
+                                      widget.singleProduct);
+                                  showMessage("Removed From To Favourite");
                                 })
                           ],
                         )
                       ],
                     ),
-                    CupertinoButton(
+                    /*  CupertinoButton(
                         minSize: 0,
                         padding: EdgeInsets.all(0),
                         child: Icon(
                           Icons.delete,
                           color: Colors.red,
                         ),
-                        // child: Text("Remove From Cart",
+                        // child: Text("Remove From Favourite",
                         //     style:
                         //         TextStyle(fontSize: 12, color: Colors.red)),
                         onPressed: () {
                           AppProvider appProvider =
                               Provider.of<AppProvider>(context, listen: false);
-                          appProvider.removeCartProduct(widget.singleProduct);
-                          showMessage("Removed From To Cart");
-                        })
+                          appProvider
+                              .removeFavoriteProduct(widget.singleProduct);
+                          showMessage("Removed From To Favourite");
+                        }) */
                   ],
                 ),
 
