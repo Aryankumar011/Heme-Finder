@@ -5,6 +5,7 @@ import 'package:home_finder_new/constants/routes.dart';
 import 'package:home_finder_new/firebase_helper/firebase_auth_helper/firebase_auth_helper.dart';
 import 'package:home_finder_new/screens/Home/home.dart';
 import 'package:home_finder_new/screens/auth_ui/sign_up/sign_up.dart';
+import 'package:home_finder_new/screens/custom_bottom_bar/custom_bottom_bar.dart';
 import 'package:home_finder_new/widgets/primarybutton/primary_button.dart';
 import 'package:home_finder_new/widgets/top_titles/top_titleles.dart';
 
@@ -81,7 +82,8 @@ class _LoginState extends State<Login> {
                               .login(email.text, password.text, context);
                           if (isLogined) {
                             Routes.instance.pushAndRemoveUntil(
-                                widget: Home(), context: context);
+                                widget: CustomBottomBar() /* Home() */,
+                                context: context);
                           }
                         }
                       },

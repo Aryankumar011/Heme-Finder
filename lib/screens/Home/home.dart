@@ -4,9 +4,11 @@ import 'package:home_finder_new/constants/routes.dart';
 import 'package:home_finder_new/firebase_helper/firebase_firestore_helper/firebase_firestore.dart';
 import 'package:home_finder_new/models/category_model/category_model.dart';
 import 'package:home_finder_new/models/product_model/product_model.dart';
+import 'package:home_finder_new/provider/app_provider.dart';
 import 'package:home_finder_new/screens/NavDrawer/navdrawer.dart';
 import 'package:home_finder_new/screens/category_view/category_view.dart';
 import 'package:home_finder_new/screens/product_details/product_details.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -22,8 +24,8 @@ class _HomeState extends State<Home> {
   bool isLoading = false;
   @override
   void initState() {
-    // AppProvider appProvider = Provider.of<AppProvider>(context, listen: false);
-    // appProvider.getUserInfoFirebase();
+    AppProvider appProvider = Provider.of<AppProvider>(context, listen: false);
+    appProvider.getUserInfoFirebase();
     getCategoryList();
     super.initState();
   }
