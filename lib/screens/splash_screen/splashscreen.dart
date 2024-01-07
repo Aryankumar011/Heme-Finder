@@ -31,14 +31,14 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Created By : Aryan Panchal",
+              "Created By : Aryan Panchal & Team",
               style: TextStyle(fontSize: 10.0),
             ),
             SizedBox(
               height: 2,
             ),
             Text(
-              "©aryanpanchal.me",
+              "©gec patan",
               style: TextStyle(fontSize: 10.0),
             ),
           ],
