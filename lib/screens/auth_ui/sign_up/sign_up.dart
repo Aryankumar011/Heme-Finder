@@ -102,9 +102,12 @@ class _SignUpState extends State<SignUp> {
                               .signUp(name.text, email.text, password.text,
                                   context);
                           if (isLogined) {
+                            // Navigator.pop(context);
+                            // Routes.instance.pushAndRemoveUntil(
+                            //     widget: CustomBottomBar() /* Home() */,
+                            //     context: context);
                             Routes.instance.pushAndRemoveUntil(
-                                widget: CustomBottomBar() /* Home() */,
-                                context: context);
+                                widget: CustomBottomBar(), context: context);
                           }
                         }
                       },

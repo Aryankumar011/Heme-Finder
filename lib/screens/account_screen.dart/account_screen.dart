@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:home_finder_new/constants/routes.dart';
 import 'package:home_finder_new/firebase_helper/firebase_auth_helper/firebase_auth_helper.dart';
-import 'package:home_finder_new/screens/auth_ui/welcome/welcome.dart';
+import 'package:home_finder_new/provider/app_provider.dart';
+import 'package:home_finder_new/widgets/primarybutton/primary_button.dart';
+import 'package:provider/provider.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -13,6 +14,9 @@ class AccountScreen extends StatefulWidget {
 class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
+    AppProvider appProvider = Provider.of<AppProvider>(
+      context,
+    );
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -24,22 +28,39 @@ class _AccountScreenState extends State<AccountScreen> {
               child: Container(
                 child: Column(
                   children: [
-                    Icon(
-                      Icons.person_outline_outlined,
-                      size: 100,
+                    appProvider.getUserInformation.image == null
+                        ? const Icon(
+                            Icons.person_outline,
+                            size: 120,
+                          )
+                        : CircleAvatar(
+                            backgroundImage: NetworkImage(
+                                appProvider.getUserInformation.image!),
+                            radius: 60,
+                          ),
+                    Text(
+                      appProvider.getUserInformation.name,
+                      style: const TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     Text(
-                      "Aryan Panchal",
-                      style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                      appProvider.getUserInformation.email,
                     ),
-                    Text("aryanpanchal1110@gmail.com"),
-                    ElevatedButton(
-                        onPressed: () {},
-                        child: Text(
-                          "Edit Profile",
-                          style: TextStyle(color: Colors.white),
-                        ))
+                    const SizedBox(
+                      height: 12.0,
+                    ),
+                    SizedBox(
+                      width: 130,
+                      child: PrimaryButton(
+                        title: "Edit Profile",
+                        onPressed: () {
+                          /*  Routes.instance
+                          .push(widget: const EditProfile(), context: context); */
+                        },
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -77,7 +98,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 ),
               ),
               flex: 2,
-            )
+            ),
           ],
         ));
   }

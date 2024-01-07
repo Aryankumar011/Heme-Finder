@@ -24,7 +24,7 @@ class FirebaseAuthHelper {
     }
   }
 
-  Future<bool> signUp(
+  /* Future<bool> signUp(
       String name, String email, String password, BuildContext context) async {
     try {
       showLoaderDialog(context);
@@ -44,6 +44,25 @@ class FirebaseAuthHelper {
       return true;
     } on FirebaseAuthException catch (error) {
       Navigator.of(context).pop();
+      showMessage(error.code.toString());
+      return false;
+    }
+  } */
+
+  Future<bool> signUp(
+      String name, String email, String password, BuildContext context) async {
+    try {
+      showLoaderDialog(context);
+      UserCredential userCredential = await _auth
+          .createUserWithEmailAndPassword(email: email, password: password);
+      UserModel userModel = UserModel(
+          id: userCredential.user!.uid, name: name, email: email, image: null);
+
+      _firestore.collection("users").doc(userModel.id).set(userModel.toJson());
+      Navigator.of(context, rootNavigator: true).pop();
+      return true;
+    } on FirebaseAuthException catch (error) {
+      Navigator.of(context, rootNavigator: true).pop();
       showMessage(error.code.toString());
       return false;
     }

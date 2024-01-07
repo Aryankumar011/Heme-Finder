@@ -1,44 +1,104 @@
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:home_finder_new/constants/conststants.dart';
 import 'package:home_finder_new/firebase_helper/firebase_firestore_helper/firebase_firestore.dart';
 import 'package:home_finder_new/models/product_model/product_model.dart';
 import 'package:home_finder_new/models/user_model/user_model.dart';
 
-// Cart Working....
 class AppProvider with ChangeNotifier {
+  //// Cart Work
+  final List<ProductModel>? _cartProductList = [];
+  final List<ProductModel>? _buyProductList = [];
+
   UserModel? _userModel;
+
   UserModel get getUserInformation => _userModel!;
-  List<ProductModel> _cartProductList = [];
+
   void addCartProduct(ProductModel productModel) {
-    _cartProductList.add(productModel);
+    _cartProductList?.add(productModel);
     notifyListeners();
   }
 
   void removeCartProduct(ProductModel productModel) {
-    _cartProductList.remove(productModel);
+    _cartProductList?.remove(productModel);
     notifyListeners();
   }
 
-  List<ProductModel> get getcartProductList => _cartProductList;
+  List<ProductModel>? get getCartProductList => _cartProductList;
 
-  /// Favourite Working...
+  ///// Favourite ///////
+  final List<ProductModel> _favouriteProductList = [];
 
-  List<ProductModel> _favoriteProductList = [];
-  void addFavoriteProduct(ProductModel productModel) {
-    _favoriteProductList.add(productModel);
+  void addFavouriteProduct(ProductModel productModel) {
+    _favouriteProductList.add(productModel);
     notifyListeners();
   }
 
-  void removeFavoriteProduct(ProductModel productModel) {
-    _favoriteProductList.remove(productModel);
+  void removeFavouriteProduct(ProductModel productModel) {
+    _favouriteProductList.remove(productModel);
     notifyListeners();
   }
 
-  List<ProductModel> get getFavoriteProductList => _favoriteProductList;
+  List<ProductModel> get getFavouriteProductList => _favouriteProductList;
 
-  /// User Information
-  ///
+  ////// USer Information
   void getUserInfoFirebase() async {
     _userModel = await FirebaseFirestoreHelper.instance.getUserInformation();
+    notifyListeners();
+  }
+
+  void updateUserInfoFirebase(
+      BuildContext context, UserModel userModel, File? file) async {
+    if (file == null) {
+      showLoaderDialog(context);
+
+      _userModel = userModel;
+      await FirebaseFirestore.instance
+          .collection("users")
+          .doc(_userModel!.id)
+          .set(_userModel!.toJson());
+      Navigator.of(context, rootNavigator: true).pop();
+      Navigator.of(context).pop();
+    } else {
+      showLoaderDialog(context);
+
+      // String imageUrl =
+      //     await FirebaseStorageHelper.instance.uploadUserImage(file);
+      // _userModel = userModel.copyWith(image: imageUrl);
+      await FirebaseFirestore.instance
+          .collection("users")
+          .doc(_userModel!.id)
+          .set(_userModel!.toJson());
+      Navigator.of(context, rootNavigator: true).pop();
+      Navigator.of(context).pop();
+    }
+    showMessage("Successfully updated profile");
+
+    notifyListeners();
+  }
+  //////// TOTAL PRICE / // / // / / // / / / // /
+
+/*   double totalPrice() {
+    double totalPrice = 0.0;
+    for (var element in _cartProductList) {
+      totalPrice += element.price * element.qty!;
+    }
+    return totalPrice;
+  } */
+
+  /*  double totalPriceBuyProductList() {
+    double totalPrice = 0.0;
+    for (var element in _buyProductList) {
+      totalPrice += element.price * element.qty!;
+    }
+    return totalPrice;
+  }
+ */
+  void updateQty(ProductModel productModel, int qty) {
+    int index = _cartProductList!.indexOf(productModel);
+    _cartProductList?[index].qty = qty;
     notifyListeners();
   }
 }
