@@ -52,7 +52,7 @@ class _AccountScreenState extends State<AccountScreen> {
                       height: 12.0,
                     ),
                     SizedBox(
-                      width: 130,
+                      width: 150,
                       child: PrimaryButton(
                         title: "Edit Profile",
                         onPressed: () {
