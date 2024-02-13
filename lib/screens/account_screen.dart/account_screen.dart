@@ -26,42 +26,44 @@ class _AccountScreenState extends State<AccountScreen> {
           children: [
             Expanded(
               child: Container(
-                child: Column(
-                  children: [
-                    appProvider.getUserInformation.image == null
-                        ? const Icon(
-                            Icons.person_outline,
-                            size: 120,
-                          )
-                        : CircleAvatar(
-                            backgroundImage: NetworkImage(
-                                appProvider.getUserInformation.image!),
-                            radius: 60,
-                          ),
-                    Text(
-                      appProvider.getUserInformation.name,
-                      style: const TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      appProvider.getUserInformation.image == null
+                          ? const Icon(
+                              Icons.person_outline,
+                              size: 120,
+                            )
+                          : CircleAvatar(
+                              backgroundImage: NetworkImage(
+                                  appProvider.getUserInformation.image!),
+                              radius: 60,
+                            ),
+                      Text(
+                        appProvider.getUserInformation.name,
+                        style: const TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    Text(
-                      appProvider.getUserInformation.email,
-                    ),
-                    const SizedBox(
-                      height: 12.0,
-                    ),
-                    SizedBox(
-                      width: 150,
-                      child: PrimaryButton(
-                        title: "Edit Profile",
-                        onPressed: () {
-                          /*  Routes.instance
-                          .push(widget: const EditProfile(), context: context); */
-                        },
+                      Text(
+                        appProvider.getUserInformation.email,
                       ),
-                    ),
-                  ],
+                      const SizedBox(
+                        height: 12.0,
+                      ),
+                      SizedBox(
+                        width: 150,
+                        child: PrimaryButton(
+                          title: "Edit Profile",
+                          onPressed: () {
+                            /*  Routes.instance
+                            .push(widget: const EditProfile(), context: context); */
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -71,7 +73,7 @@ class _AccountScreenState extends State<AccountScreen> {
                   children: [
                     ListTile(
                       leading: Icon(Icons.shopping_bag),
-                      title: Text("Your Purchage Homes"),
+                      title: Text("Your Purchase Homes"),
                     ),
                     ListTile(
                       leading: Icon(Icons.favorite_outline),
